@@ -3,7 +3,11 @@ function! filer#tree#GenerateTree(dir, level)
 	let new_tree = [] " Local variable storing the entire tree for the current level of the function
 
 	" Get the list of files in the current directory, and with link endings
-	let cmd = "ls -AFv --group-directories-first"
+  if has("mac")
+	  let cmd = "gls -AF --group-directories-first"
+  else
+	  let cmd = "ls -AFv --group-directories-first"
+  endif
 	let files = split(system(cmd . " -L '" . a:dir . "' 2> /dev/null"), "\n")
 	let link_ending = split(system(cmd . " -H '" . a:dir . "' 2> /dev/null"), "\n")
 

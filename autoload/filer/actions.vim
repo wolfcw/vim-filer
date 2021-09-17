@@ -41,8 +41,11 @@ function! filer#actions#XdgOpen()
 	else
 		let path = g:filer#tree[file_index].path
 	endif
-
-	silent! exec "!xdg-open '" . resolve(path) . "'"
+  if has("mac")
+	  silent! exec "!open '" . resolve(path) . "'"
+  else
+  	silent! exec "!xdg-open '" . resolve(path) . "'"
+  endif
 endfunction
 
 " }}}
@@ -205,7 +208,11 @@ function! filer#actions#ShowInfo()
 	endif
 
 	" Get the file type, and if it is a normal file get its size
-	let type = system("stat -c %F '" . path . "' 2> /dev/null")
+  if has("mac")
+	  let type = system("stat -f T '" . path . "' 2> /dev/null")
+  else
+	  let type = system("stat -c %F '" . path . "' 2> /dev/null")
+  endif
 	let info .= "File Type: " . substitute(type, "^.", "\\u&", "g")
 
 	" Get the file size, or the size of the contents of a directory
@@ -292,7 +299,7 @@ endfunction
 
 " }}}
 " FUNCTION: filer#actions#SetExecutable(value) {{{1
-function! filer#actions#SetExecutable(value) 
+function! filer#actions#SetExecutable(value)
 	let file_index = filer#functions#CursorIndex()
 	if file_index == -1 || g:filer#tree[file_index].end == "/"
 		return
