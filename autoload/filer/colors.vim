@@ -7,9 +7,9 @@ function! filer#colors#SetupColors()
 	syntax match filerPwd /^\s[/~].*\/\s*$/
 	syntax match filerPwd /^\/\s*$/
 
-	execute printf('syntax match filerGitCommitted /%s/', g:filer#icons.g_committed)
-	execute printf('syntax match filerGitAdded /%s/', g:filer#icons.g_added)
-	execute printf('syntax match filerGitModified /%s/', g:filer#icons.g_modified)
+	" execute printf('syntax match filerGitCommitted /%s/', g:filer#icons.g_committed)
+	" execute printf('syntax match filerGitAdded /%s/', g:filer#icons.g_added)
+	" execute printf('syntax match filerGitModified /%s/', g:filer#icons.g_modified)
 
 	highlight filerPwd ctermfg=74 guifg=#5FAFD7 cterm=bold gui=bold
 	highlight filerFile ctermfg=7 guifg=#BCBCBC
